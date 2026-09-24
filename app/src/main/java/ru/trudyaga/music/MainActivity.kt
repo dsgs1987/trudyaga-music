@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,13 +34,13 @@ private val tracks=listOf(
 )
 
 @Composable fun Cover(t:Track,modifier:Modifier=Modifier){
- Canvas(modifier.background(RoundedCornerShape(18.dp)).then(modifier)){
-   drawRoundRect(Brush.linearGradient(listOf(t.c1,t.c2)),cornerRadius=androidx.compose.ui.geometry.CornerRadius(34f,34f))
+ Box(modifier=modifier.clip(RoundedCornerShape(18.dp)),contentAlignment=Alignment.Center){
+  Canvas(Modifier.fillMaxSize()){
+   drawRect(Brush.linearGradient(listOf(t.c1,t.c2)))
    drawCircle(Color.White.copy(alpha=.08f),size.minDimension*.32f,center=Offset(size.width*.78f,size.height*.22f))
    drawCircle(Color.Black.copy(alpha=.14f),size.minDimension*.5f,center=Offset(size.width*.15f,size.height*.88f))
- }
- Box(modifier=Modifier.fillMaxSize(),contentAlignment=Alignment.Center){
-   Text(t.icon,color=Color.White,fontSize=42.sp,fontWeight=FontWeight.Bold)
+  }
+  Text(t.icon,color=Color.White,fontSize=42.sp,fontWeight=FontWeight.Bold)
  }
 }
 
@@ -79,7 +80,8 @@ private val tracks=listOf(
     }
    }
    Row(Modifier.fillMaxWidth().background(bg).padding(vertical=8.dp),horizontalArrangement=Arrangement.SpaceAround){
-    listOf("⌂" to "Главная","⌕" to "Поиск","♫" to "Моя музыка","♡" to "Избранное").forEachIndexed{i,p->Column(horizontalAlignment=Alignment.CenterHorizontally,modifier=Modifier.clickable{tab=i}){Text(p.first,color=if(tab==i)Color.White else muted,fontSize=22.sp);Text(p.second,color=if(tab==i)Color.White else muted,fontSize=10.sp)}}}
+    listOf("⌂" to "Главная","⌕" to "Поиск","♫" to "Моя музыка","♡" to "Избранное").forEachIndexed{i,p->Column(horizontalAlignment=Alignment.CenterHorizontally,modifier=Modifier.clickable{tab=i}){Text(p.first,color=if(tab==i)Color.White else muted,fontSize=22.sp);Text(p.second,color=if(tab==i)Color.White else muted,fontSize=10.sp)}}
+   }
   }
  }
 }
