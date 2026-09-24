@@ -69,7 +69,11 @@ private val tracks=listOf(
     Spacer(Modifier.height(22.dp));Text("Плейлисты",color=Color.White,fontSize=21.sp,fontWeight=FontWeight.Bold)
     Spacer(Modifier.height(12.dp))
     tracks.drop(2).forEach{t->Row(Modifier.fillMaxWidth().clickable{current=t;playing=true}.padding(vertical=7.dp),verticalAlignment=Alignment.CenterVertically){
-      Cover(t,Modifier.size(62.dp));Spacer(Modifier.width(14.dp));Column(Modifier.weight(1f)){Text(t.title,color=Color.White,fontWeight=FontWeight.Medium);Text(t.subtitle,color=muted,fontSize=12.sp)}Text("⋮",color=muted,fontSize=24.sp)
+      Cover(t,Modifier.size(62.dp));Spacer(Modifier.width(14.dp));Column(Modifier.weight(1f)) {
+        Text(t.title, color=Color.White, fontWeight=FontWeight.Medium)
+        Text(t.subtitle, color=muted, fontSize=12.sp)
+      }
+      Text("⋮", color=muted, fontSize=24.sp)
     }}
     Spacer(Modifier.height(90.dp))
    }
